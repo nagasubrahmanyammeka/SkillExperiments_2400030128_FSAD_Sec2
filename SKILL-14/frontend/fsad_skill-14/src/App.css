@@ -1,0 +1,43 @@
+.form-container {
+  width: 300px;
+  margin: 100px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  background: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  background: #222;
+  color: white;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+.page {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.card {
+  padding: 20px;
+  border: 1px solid #ccc;
+  display: inline-block;
+}
