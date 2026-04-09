@@ -1,11 +1,9 @@
 package com.klu.repository;
 
-
 import com.klu.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUsernameAndPassword(String username, String password);
+
+    User findByUsernameAndPassword(String username, String password);
 }

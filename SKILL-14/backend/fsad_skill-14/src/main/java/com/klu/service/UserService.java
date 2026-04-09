@@ -1,12 +1,9 @@
 package com.klu.service;
 
-
 import com.klu.model.User;
 import com.klu.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,8 +16,7 @@ public class UserService {
     }
 
     public User login(String username, String password) {
-        Optional<User> user = repo.findByUsernameAndPassword(username, password);
-        return user.orElse(null);
+        return repo.findByUsernameAndPassword(username, password);
     }
 
     public User getUserById(Long id) {

@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Register() {
-  const [user, setUser] = useState({});
+const Register = () => {
+  const [user, setUser] = useState({ username: "", password: "" });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -12,31 +12,18 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await axios.post("http://localhost:2026/api/register", user);
-
-    alert("Registration Successful");
+    await axios.post("http://localhost:8080/register", user);
+    alert("Registered Successfully");
     navigate("/login");
   };
 
   return (
-    <div className="form-container">
-      <h2>Register</h2>
-
-      <input
-        name="username"
-        placeholder="Username"
-        onChange={handleChange}
-      />
-
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        onChange={handleChange}
-      />
-
-      <button onClick={handleSubmit}>Register</button>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input name="username" onChange={handleChange} placeholder="Username" />
+      <input name="password" type="password" onChange={handleChange} placeholder="Password" />
+      <button type="submit">Register</button>
+    </form>
   );
-}
+};
+
+export default Register;

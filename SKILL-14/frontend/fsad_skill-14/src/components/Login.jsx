@@ -2,8 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
-  const [user, setUser] = useState({});
+const Login = () => {
+  const [user, setUser] = useState({
+    username: "",
+    password: ""
+  });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -14,34 +18,41 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:2026/api/login", user);
+      const res = await axios.post("http://localhost:8080/login", user);
 
-      localStorage.setItem("user", JSON.stringify(res.data));
-
-      navigate("/home");
-    } catch (err) {
-      alert("Invalid Credentials");
+      if (res.data) {
+        localStorage.setItem("userId", res.data.id);
+        navigate("/");
+      } else {
+        alert("Invalid credentials");
+      }
+    } catch (error) {
+      alert("Server error");
+      console.error(error);
     }
   };
 
   return (
-    <div className="form-container">
+    <form onSubmit={handleLogin}>
       <h2>Login</h2>
 
       <input
+        type="text"
         name="username"
         placeholder="Username"
         onChange={handleChange}
       />
 
       <input
-        name="password"
         type="password"
+        name="password"
         placeholder="Password"
         onChange={handleChange}
       />
 
-      <button onClick={handleLogin}>Login</button>
-    </div>
+      <button type="submit">Login</button>
+    </form>
   );
-}
+};
+
+export default Login;
